@@ -102,11 +102,41 @@ h1 {
     text-transform: uppercase;
 }
 
+.category {
+    margin-top: 32px;
+}
+
+.section-header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: clamp(22px, 5vw, 34px);
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+.section-note {
+    flex: 0 0 auto;
+    padding: 7px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff7b0;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
 .products {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
-    margin-top: 26px;
 }
 
 .card {
@@ -183,6 +213,13 @@ h1 {
         gap: 16px;
     }
 }
+
+@media (max-width: 520px) {
+    .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
 </style>
 </head>
 
@@ -195,61 +232,128 @@ h1 {
         <a class="back-link" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o inicio</a>
     </header>
 
-    <section class="products" aria-label="Categorias de produtos da Copa do Mundo">
-        <article class="card">
-            <div class="media"><i class="fa-solid fa-shirt" aria-hidden="true"></i></div>
-            <div class="card-content">
-                <h2>Camisetas e looks para torcer</h2>
-                <p>Opcoes para entrar no clima em casa, no churrasco ou com a galera.</p>
-                <a class="btn" href="https://lista.mercadolivre.com.br/camiseta-brasil-copa" target="_blank" rel="noopener">Ver ofertas</a>
-            </div>
-        </article>
-
-        <article class="card">
-            <div class="media"><i class="fa-solid fa-futbol" aria-hidden="true"></i></div>
-            <div class="card-content">
-                <h2>Bolas e itens de futebol</h2>
-                <p>Produtos para brincar, treinar e completar a decoracao do jogo.</p>
-                <a class="btn" href="https://lista.mercadolivre.com.br/bola-copa-do-mundo" target="_blank" rel="noopener">Ver ofertas</a>
-            </div>
-        </article>
-
-        <article class="card">
-            <div class="media"><i class="fa-solid fa-flag" aria-hidden="true"></i></div>
-            <div class="card-content">
-                <h2>Bandeiras e decoracao</h2>
-                <p>Itens para deixar sala, varanda ou area gourmet pronta para a torcida.</p>
-                <a class="btn" href="https://lista.mercadolivre.com.br/decoracao-copa-do-mundo" target="_blank" rel="noopener">Ver ofertas</a>
-            </div>
-        </article>
-
-        <article class="card">
-            <div class="media"><i class="fa-solid fa-tv" aria-hidden="true"></i></div>
-            <div class="card-content">
-                <h2>Eletronicos para assistir</h2>
-                <p>TVs, caixas de som e acessorios para melhorar a experiencia dos jogos.</p>
-                <a class="btn" href="https://lista.mercadolivre.com.br/tv-caixa-som-copa" target="_blank" rel="noopener">Ver ofertas</a>
-            </div>
-        </article>
-
-        <article class="card">
-            <div class="media"><i class="fa-solid fa-mug-saucer" aria-hidden="true"></i></div>
-            <div class="card-content">
-                <h2>Copos, petiscos e cozinha</h2>
-                <p>Achadinhos para montar mesa, lancheira e cantinho do jogo.</p>
-                <a class="btn" href="https://lista.mercadolivre.com.br/copos-petiscos-copa" target="_blank" rel="noopener">Ver ofertas</a>
-            </div>
-        </article>
-
-        <article class="card">
-            <div class="media"><i class="fa-solid fa-star" aria-hidden="true"></i></div>
-            <div class="card-content">
-                <h2>Todos os produtos da Copa</h2>
-                <p>Busca geral com varias ideias para comprar antes dos jogos.</p>
-                <a class="btn" href="https://lista.mercadolivre.com.br/copa-do-mundo" target="_blank" rel="noopener">Ver tudo</a>
-            </div>
-        </article>
-    </section>
+    <div id="productSections"></div>
 </main>
+<script>
+const categories = [
+    {
+        title: "Camisetas e looks para torcer",
+        icon: "fa-shirt",
+        note: "9 opcoes",
+        description: "Look para entrar no clima da Copa em casa, no churrasco ou com a galera.",
+        items: [
+            ["Camisa Brasil torcedor", "camisa-brasil-torcedor"],
+            ["Camiseta amarela Brasil", "camiseta-amarela-brasil-copa"],
+            ["Camisa verde Brasil", "camisa-verde-brasil-copa"],
+            ["Kit camiseta casal Brasil", "kit-camiseta-casal-brasil"],
+            ["Camiseta infantil Brasil", "camiseta-infantil-brasil-copa"],
+            ["Bone Brasil torcida", "bone-brasil-torcida"],
+            ["Shorts Brasil torcida", "shorts-brasil-torcida"],
+            ["Moletom Brasil Copa", "moletom-brasil-copa"],
+            ["Look completo torcida Brasil", "look-torcida-brasil-copa"]
+        ]
+    },
+    {
+        title: "Bolas e itens de futebol",
+        icon: "fa-futbol",
+        note: "9 opcoes",
+        description: "Produtos para brincar, treinar e completar o clima de futebol.",
+        items: [
+            ["Bola Copa do Mundo", "bola-copa-do-mundo"],
+            ["Bola de futebol campo", "bola-futebol-campo"],
+            ["Bola society", "bola-futebol-society"],
+            ["Bola futsal", "bola-futsal"],
+            ["Mini bola decorativa", "mini-bola-futebol-decorativa"],
+            ["Chuteira campo", "chuteira-campo"],
+            ["Chuteira society", "chuteira-society"],
+            ["Luva de goleiro", "luva-goleiro"],
+            ["Kit treino futebol", "kit-treino-futebol"]
+        ]
+    },
+    {
+        title: "Bandeiras e decoracao",
+        icon: "fa-flag",
+        note: "9 opcoes",
+        description: "Itens para deixar sala, varanda ou area gourmet pronta para a torcida.",
+        items: [
+            ["Bandeira do Brasil", "bandeira-brasil"],
+            ["Bandeirinhas Brasil", "bandeirinhas-brasil-copa"],
+            ["Painel decorativo Copa", "painel-decorativo-copa"],
+            ["Baloes verde amarelo", "baloes-verde-amarelo"],
+            ["Toalha de mesa Brasil", "toalha-mesa-brasil-copa"],
+            ["Adesivos Copa do Mundo", "adesivos-copa-do-mundo"],
+            ["Faixa torcida Brasil", "faixa-torcida-brasil"],
+            ["Enfeites Copa do Mundo", "enfeites-copa-do-mundo"],
+            ["Kit festa Brasil", "kit-festa-brasil-copa"]
+        ]
+    },
+    {
+        title: "Eletronicos para assistir",
+        icon: "fa-tv",
+        note: "9 opcoes",
+        description: "Achadinhos para melhorar imagem, som e conforto na hora dos jogos.",
+        items: [
+            ["Smart TV", "smart-tv"],
+            ["TV 4K", "tv-4k"],
+            ["Projetor portatil", "projetor-portatil"],
+            ["Caixa de som Bluetooth", "caixa-som-bluetooth"],
+            ["Soundbar", "soundbar"],
+            ["Suporte para TV", "suporte-tv"],
+            ["Antena digital", "antena-digital"],
+            ["Controle universal", "controle-universal-tv"],
+            ["Cabo HDMI", "cabo-hdmi"]
+        ]
+    },
+    {
+        title: "Copos, petiscos e cozinha",
+        icon: "fa-mug-saucer",
+        note: "9 opcoes",
+        description: "Tudo para montar mesa, lanche e cantinho do jogo com praticidade.",
+        items: [
+            ["Copo Brasil", "copo-brasil"],
+            ["Copo termico Brasil", "copo-termico-brasil"],
+            ["Caneca Brasil", "caneca-brasil"],
+            ["Kit churrasco", "kit-churrasco"],
+            ["Petisqueira", "petisqueira"],
+            ["Tabua de frios", "tabua-de-frios"],
+            ["Pipoqueira", "pipoqueira"],
+            ["Fritadeira eletrica", "air-fryer"],
+            ["Balde de gelo", "balde-de-gelo"]
+        ]
+    }
+];
+
+const productSections = document.getElementById("productSections");
+
+categories.forEach((category) => {
+    const section = document.createElement("section");
+    section.className = "category";
+    section.innerHTML = `
+        <div class="section-header">
+            <h2>${category.title}</h2>
+            <span class="section-note">${category.note}</span>
+        </div>
+        <div class="products" aria-label="${category.title}"></div>
+    `;
+
+    const products = section.querySelector(".products");
+
+    category.items.forEach(([title, query]) => {
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+            <div class="media"><i class="fa-solid ${category.icon}" aria-hidden="true"></i></div>
+            <div class="card-content">
+                <h2>${title}</h2>
+                <p>${category.description}</p>
+                <a class="btn" href="https://lista.mercadolivre.com.br/${query}" target="_blank" rel="noopener">Ver ofertas</a>
+            </div>
+        `;
+        products.appendChild(card);
+    });
+
+    productSections.appendChild(section);
+});
+</script>
 </body>
 </html>
