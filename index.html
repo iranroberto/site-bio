@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Especial Copa do Mundo: achadinhos, ofertas e produtos campe&otilde;es para torcer com estilo.">
+    <title>Especial Copa do Mundo - Promo VIP Premium</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #eaf8ef;
+            --panel: #083b2f;
+            --text: #fffafc;
+            --muted: #d9ffe9;
+            --green: #00a859;
+            --blue: #1d4ed8;
+            --gold: #ffd400;
+            --wine: #06281f;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            font-family: "Montserrat", Arial, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 16% 10%, rgba(0, 168, 89, 0.30), transparent 28%),
+                radial-gradient(circle at 86% 18%, rgba(255, 212, 0, 0.34), transparent 26%),
+                radial-gradient(circle at 50% 100%, rgba(29, 78, 216, 0.24), transparent 34%),
+                linear-gradient(145deg, #fffbe6 0%, var(--bg) 46%, #d8ecff 100%);
+            display: grid;
+            place-items: center;
+            padding: 24px 14px;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .page-shell {
+            width: min(100%, 392px);
+            position: relative;
+        }
+
+        .page-shell::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border-radius: 42px;
+            background: rgba(0, 168, 89, 0.28);
+            filter: blur(36px);
+            z-index: 0;
+            animation: auraPulse 5s ease-in-out infinite;
+        }
+
+        .profile-card {
+            position: relative;
+            z-index: 1;
+            min-height: 764px;
+            padding: 34px 32px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 40px;
+            background:
+                radial-gradient(circle at 50% -12%, rgba(255, 209, 102, 0.36), transparent 24%),
+                radial-gradient(circle at 0% 24%, rgba(0, 168, 89, 0.20), transparent 32%),
+                radial-gradient(circle at 100% 50%, rgba(29, 78, 216, 0.20), transparent 30%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.035)),
+                var(--panel);
+            box-shadow:
+                0 24px 70px rgba(6, 40, 31, 0.30),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            animation: cardEntrance 700ms ease-out both;
+        }
+
+        .profile-card::after {
+            content: "";
+            position: absolute;
+            inset: 1px;
+            border-radius: 39px;
+            background:
+                linear-gradient(145deg, rgba(255, 212, 0, 0.14), transparent 35%, rgba(29, 78, 216, 0.16)),
+                repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 18px);
+            pointer-events: none;
+        }
+
+        .profile-card::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            background: conic-gradient(from 180deg, transparent 0 16%, rgba(255, 212, 0, 0.58), transparent 42% 70%, rgba(0, 168, 89, 0.50), rgba(29, 78, 216, 0.44), transparent 100%);
+            opacity: 0.68;
+            padding: 2px;
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderSpin 7s linear infinite;
+            z-index: 0;
+        }
+
+        .floating-icons {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .floating-icons span {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.28);
+            font-size: 18px;
+            animation: iconFloat 7s ease-in-out infinite;
+        }
+
+        .floating-icons span:nth-child(1) {
+            top: 36px;
+            left: 26px;
+        }
+
+        .floating-icons span:nth-child(2) {
+            top: 104px;
+            right: 22px;
+            animation-delay: 1.2s;
+        }
+
+        .floating-icons span:nth-child(3) {
+            right: 38px;
+            bottom: 210px;
+            animation-delay: 2.1s;
+        }
+
+        .floating-icons span:nth-child(4) {
+            left: 28px;
+            bottom: 152px;
+            animation-delay: 3s;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .season-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            padding: 8px 13px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            border-radius: 999px;
+            color: #063d2f;
+            background: linear-gradient(135deg, #fff8bf 0%, #dffbe9 58%, #dbeafe 100%);
+            box-shadow: 0 10px 24px rgba(0, 168, 89, 0.20);
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .avatar-wrap {
+            width: 96px;
+            height: 96px;
+            margin-bottom: 18px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, var(--gold), var(--green), var(--blue));
+            box-shadow: 0 0 0 7px rgba(255, 244, 181, 0.18), 0 12px 28px rgba(6, 40, 31, 0.34);
+            animation: floatLogo 3.8s ease-in-out infinite;
+        }
+
+        .avatar {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            object-fit: cover;
+            background: #0b1220;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: 30px;
+            line-height: 1.12;
+            font-weight: 800;
+            letter-spacing: 0;
+        }
+
+        .subtitle {
+            max-width: 294px;
+            margin: 0 0 18px;
+            color: var(--muted);
+            font-size: 14.5px;
+            line-height: 1.48;
+            font-weight: 500;
+        }
+
+        .hero-offer {
+            width: 100%;
+            margin-bottom: 24px;
+            padding: 15px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 20px;
+            color: #063d2f;
+            background: linear-gradient(135deg, #ffffff 0%, #e9fff2 48%, #fff8c7 100%);
+            box-shadow: 0 16px 30px rgba(6, 40, 31, 0.24);
+            font-size: 13px;
+            font-weight: 800;
+            line-height: 1.35;
+        }
+
+        .hero-offer strong {
+            color: #008f4b;
+        }
+
+        .social-list {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .social-link {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.13);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+        }
+
+        .social-link:hover,
+        .social-link:focus-visible {
+            transform: translateY(-3px);
+            border-color: rgba(255, 209, 102, 0.62);
+            background: rgba(255, 255, 255, 0.18);
+            outline: none;
+        }
+
+        .links {
+            width: 100%;
+            display: grid;
+            gap: 14px;
+        }
+
+        .link-button {
+            position: relative;
+            min-height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 18px;
+            border-radius: 16px;
+            border: 2px solid transparent;
+            font-size: 15px;
+            font-weight: 800;
+            line-height: 1.15;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            box-shadow: 0 12px 24px rgba(6, 40, 31, 0.20);
+            transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+            overflow: hidden;
+        }
+
+        .link-button::before {
+            content: "";
+            position: absolute;
+            top: -40%;
+            bottom: -40%;
+            left: -60%;
+            width: 38%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.56), transparent);
+            transform: skewX(-18deg);
+            animation: buttonShine 4.2s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .link-button:hover,
+        .link-button:focus-visible {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 30px rgba(74, 18, 48, 0.28);
+            outline: none;
+        }
+
+        .link-button.primary {
+            color: #06281f;
+            background: linear-gradient(135deg, #fff16b 0%, #00a859 54%, #1d4ed8 100%);
+            box-shadow: 0 14px 30px rgba(0, 168, 89, 0.26);
+        }
+
+        .link-button.secondary {
+            color: #06281f;
+            border-color: var(--gold);
+            background: #ffffff;
+        }
+
+        .link-button i {
+            position: relative;
+            z-index: 1;
+            width: 18px;
+            font-size: 16px;
+            color: inherit;
+        }
+
+        .link-button span {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: 3px;
+            text-align: center;
+        }
+
+        .link-button small {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1.1;
+            text-transform: none;
+            color: rgba(6, 40, 31, 0.78);
+        }
+
+        .link-button.valentines {
+            min-height: 68px;
+            color: #fffafc;
+            border-color: rgba(255, 209, 102, 0.72);
+            background:
+                radial-gradient(circle at 14% 18%, rgba(255, 255, 255, 0.38), transparent 16%),
+                radial-gradient(circle at 88% 82%, rgba(255, 209, 102, 0.34), transparent 18%),
+                linear-gradient(135deg, #ff2f86 0%, #d61f5c 52%, #7b1239 100%);
+            box-shadow:
+                0 20px 40px rgba(214, 31, 92, 0.42),
+                0 0 0 3px rgba(255, 209, 102, 0.22),
+                inset 0 1px 0 rgba(255, 255, 255, 0.34);
+            text-shadow: 0 2px 8px rgba(74, 18, 48, 0.40);
+            animation: mainCtaPulse 2.8s ease-in-out infinite;
+        }
+
+        .link-button.valentines::before {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.70), transparent);
+        }
+
+        .link-button.valentines::after {
+            content: "\f004 \f004";
+            position: absolute;
+            right: 12px;
+            bottom: 8px;
+            z-index: 0;
+            color: rgba(255, 255, 255, 0.20);
+            font: 900 18px/1 "Font Awesome 6 Free";
+            letter-spacing: 5px;
+            transform: rotate(-10deg);
+            pointer-events: none;
+        }
+
+        .link-button.valentines i,
+        .link-button.valentines span {
+            color: #fffafc;
+        }
+
+        .link-button.valentines i {
+            filter: drop-shadow(0 0 8px rgba(255, 209, 102, 0.56));
+        }
+
+        .link-button.valentines:hover {
+            box-shadow:
+                0 10px 22px rgba(214, 31, 92, 0.52),
+                0 0 0 3px rgba(255, 209, 102, 0.30);
+            filter: brightness(1.05);
+        }
+
+        .link-button.world-products {
+            min-height: 64px;
+            color: #06281f;
+            border-color: rgba(255, 212, 0, 0.76);
+            background:
+                radial-gradient(circle at 12% 20%, rgba(255, 255, 255, 0.40), transparent 16%),
+                radial-gradient(circle at 90% 80%, rgba(255, 212, 0, 0.40), transparent 18%),
+                linear-gradient(135deg, #fff16b 0%, #00a859 50%, #1d4ed8 100%);
+            box-shadow:
+                0 18px 36px rgba(0, 168, 89, 0.34),
+                0 0 0 3px rgba(255, 212, 0, 0.18),
+                inset 0 1px 0 rgba(255, 255, 255, 0.36);
+        }
+
+        .link-button.world-products::after {
+            content: "\f1e3";
+            position: absolute;
+            right: 13px;
+            bottom: 8px;
+            z-index: 0;
+            color: rgba(255, 255, 255, 0.24);
+            font: 900 24px/1 "Font Awesome 6 Free";
+            transform: rotate(-12deg);
+            pointer-events: none;
+        }
+
+        .link-button.world-products i {
+            color: #06281f;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.45));
+        }
+
+        .link-button.world-products:hover {
+            box-shadow:
+                0 12px 26px rgba(0, 168, 89, 0.46),
+                0 0 0 3px rgba(255, 212, 0, 0.28);
+            filter: brightness(1.05);
+        }
+
+        footer {
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.60);
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1.45;
+            text-transform: uppercase;
+        }
+
+        @keyframes cardEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes auraPulse {
+            0%,
+            100% {
+                opacity: 0.55;
+                transform: scale(0.96);
+            }
+
+            50% {
+                opacity: 0.95;
+                transform: scale(1.04);
+            }
+        }
+
+        @keyframes borderSpin {
+            to {
+                transform: rotate(1turn);
+            }
+        }
+
+        @keyframes floatLogo {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+        @keyframes buttonShine {
+            0%,
+            34% {
+                left: -60%;
+            }
+
+            52%,
+            100% {
+                left: 125%;
+            }
+        }
+
+        @keyframes iconFloat {
+            0%,
+            100% {
+                opacity: 0.35;
+                transform: translateY(0) rotate(-8deg);
+            }
+
+            50% {
+                opacity: 0.75;
+                transform: translateY(-12px) rotate(8deg);
+            }
+        }
+
+        @keyframes mainCtaPulse {
+            0%,
+            100% {
+                transform: translateY(0);
+                box-shadow:
+                    0 20px 40px rgba(214, 31, 92, 0.42),
+                    0 0 0 3px rgba(255, 209, 102, 0.22);
+            }
+
+            50% {
+                transform: translateY(-2px);
+                box-shadow:
+                    0 24px 46px rgba(214, 31, 92, 0.52),
+                    0 0 0 5px rgba(255, 209, 102, 0.24);
+            }
+        }
+
+        @media (max-width: 420px) {
+            body {
+                padding: 18px 10px;
+            }
+
+            .profile-card {
+                min-height: auto;
+                padding: 34px 24px 30px;
+                border-radius: 34px;
+            }
+
+            .profile-card::after {
+                border-radius: 33px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+
+            .subtitle {
+                font-size: 13.5px;
+            }
+
+            .link-button {
+                min-height: 56px;
+                padding: 10px 14px;
+                font-size: 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page-shell" aria-label="Links Promo VIP Premium">
+        <section class="profile-card">
+            <div class="floating-icons" aria-hidden="true">
+                <span><i class="fa-solid fa-futbol"></i></span>
+                <span><i class="fa-solid fa-trophy"></i></span>
+                <span><i class="fa-solid fa-shirt"></i></span>
+                <span><i class="fa-solid fa-star"></i></span>
+            </div>
+
+            <div class="content">
+                <div class="season-badge">
+                    <i class="fa-solid fa-trophy" aria-hidden="true"></i>
+                    Especial Copa do Mundo
+                </div>
+
+                <div class="avatar-wrap">
+                    <img class="avatar" src="perfil.png" alt="Logo Achadinhos da Tati e Iran">
+                </div>
+
+                <h1>Ofertas campe&atilde;s para torcer</h1>
+
+                <p class="subtitle">
+                    Achadinhos para entrar no clima da Copa do Mundo com estilo, economia e aquela energia de jogo decisivo.
+                </p>
+
+                <div class="hero-offer">
+                    <strong>Ofertas selecionadas para hoje:</strong> clique no especial e encontre produtos para torcer, presentear e aproveitar.
+                </div>
+
+                <nav class="social-list" aria-label="Redes sociais">
+                    <a class="social-link" href="https://www.tiktok.com/@tatieiran?lang=pt-BR" target="_blank" rel="noopener" aria-label="TikTok" data-track-click="TikTok">
+                        <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
+                    </a>
+                    <a class="social-link" href="https://www.facebook.com/profile.php?id=61567237133987" target="_blank" rel="noopener" aria-label="Facebook" data-track-click="Facebook">
+                        <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+                    </a>
+                    <a class="social-link" href="https://www.instagram.com/tati_iran/" target="_blank" rel="noopener" aria-label="Instagram" data-track-click="Instagram">
+                        <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                    </a>
+                    <a class="social-link" href="https://chat.whatsapp.com/Iz67VeGNI9JH7B62GiE95J" target="_blank" rel="noopener" aria-label="WhatsApp" data-track-click="WhatsApp">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                    </a>
+                </nav>
+
+                <div class="links">
+                    <a class="link-button primary valentines" href="namorados.html" data-track-click="Especial Dia dos Namorados">
+                        <i class="fa-solid fa-heart" aria-hidden="true"></i>
+                        <span>Ver Especial Dia dos Namorados</span>
+                    </a>
+
+                    <a class="link-button primary world-products" href="copa.html" data-track-click="Produtos Copa do Mundo">
+                        <i class="fa-solid fa-futbol" aria-hidden="true"></i>
+                        <span>Produtos Copa do Mundo</span>
+                    </a>
+
+                    <a class="link-button secondary" href="https://chat.whatsapp.com/Iz67VeGNI9JH7B62GiE95J" target="_blank" rel="noopener" data-track-click="Meu Grupo VIP">
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                        <span>Entrar no Grupo VIP</span>
+                    </a>
+
+                    <a class="link-button primary" href="https://meli.la/1P21Ath" target="_blank" rel="noopener" data-track-click="Produtos Mais Vendidos">
+                        <i class="fa-solid fa-box-open" aria-hidden="true"></i>
+                        <span>Produtos Mais Vendidos</span>
+                    </a>
+                </div>
+
+                <footer>
+                    Copa, ofertas e achadinhos em um s&oacute; lugar
+                </footer>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function notifyTelegramClick(linkName) {
+            fetch("/telegram-click", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                keepalive: true,
+                body: JSON.stringify({
+                    linkName: linkName,
+                    page: window.location.href,
+                    timestamp: new Date().toLocaleString("pt-BR")
+                })
+            }).catch(function () {});
+        }
+
+        document.querySelectorAll("[data-track-click]").forEach(function (link) {
+            link.addEventListener("click", function () {
+                notifyTelegramClick(link.getAttribute("data-track-click"));
+            });
+        });
+    </script>
+</body>
+</html>

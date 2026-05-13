@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produtos Copa do Mundo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root {
+    --bg: #05291f;
+    --panel: #083b2f;
+    --green: #00a859;
+    --blue: #1d4ed8;
+    --gold: #ffd400;
+    --text: #fffafc;
+    --dark: #06281f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Montserrat", Arial, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 16% 10%, rgba(0, 168, 89, 0.32), transparent 28rem),
+        radial-gradient(circle at 86% 18%, rgba(255, 212, 0, 0.28), transparent 24rem),
+        radial-gradient(circle at 50% 100%, rgba(29, 78, 216, 0.25), transparent 30rem),
+        linear-gradient(145deg, #031c17 0%, var(--bg) 55%, #09244f 100%);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.page {
+    width: min(1080px, 100%);
+    margin: 0 auto;
+    padding: 22px 14px 36px;
+}
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 30px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 26px;
+    text-align: center;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 212, 0, 0.26), transparent 14rem),
+        radial-gradient(circle at 80% 80%, rgba(29, 78, 216, 0.24), transparent 16rem),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05)),
+        var(--panel);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.30);
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #fff16b, #00a859, #1d4ed8);
+    color: var(--dark);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(32px, 8vw, 58px);
+    line-height: 1.05;
+    font-weight: 800;
+}
+
+.subtitle {
+    width: min(680px, 100%);
+    margin: 14px auto 0;
+    color: rgba(255, 255, 255, 0.84);
+    font-size: clamp(14px, 3.5vw, 17px);
+    font-weight: 600;
+    line-height: 1.55;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    color: #fff7b0;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 26px;
+}
+
+.card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    background: #fff;
+    color: #171923;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 22px 52px rgba(0, 168, 89, 0.20), 0 18px 42px rgba(0, 0, 0, 0.26);
+}
+
+.media {
+    display: grid;
+    place-items: center;
+    min-height: 132px;
+    background:
+        radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.92) 0 32%, transparent 33%),
+        linear-gradient(135deg, #fff16b, #e9fff2 48%, #dbeafe);
+}
+
+.media i {
+    color: var(--dark);
+    font-size: 46px;
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.14));
+}
+
+.card-content {
+    display: flex;
+    min-height: 142px;
+    flex-direction: column;
+    padding: 14px;
+}
+
+.card h2 {
+    margin: 0 0 8px;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.card p {
+    margin: 0 0 14px;
+    color: #5f6676;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    margin-top: auto;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #fff16b 0%, #00a859 54%, #1d4ed8 100%);
+    color: var(--dark);
+    font-size: 12px;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+@media (min-width: 720px) {
+    .products {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+<main class="page">
+    <header class="hero">
+        <div class="badge"><i class="fa-solid fa-trophy" aria-hidden="true"></i> Produtos Copa do Mundo</div>
+        <h1>Achadinhos para torcer</h1>
+        <p class="subtitle">Selecao de buscas rapidas para encontrar camisetas, decoracao, acessorios e itens para assistir aos jogos no clima da Copa.</p>
+        <a class="back-link" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o inicio</a>
+    </header>
+
+    <section class="products" aria-label="Categorias de produtos da Copa do Mundo">
+        <article class="card">
+            <div class="media"><i class="fa-solid fa-shirt" aria-hidden="true"></i></div>
+            <div class="card-content">
+                <h2>Camisetas e looks para torcer</h2>
+                <p>Opcoes para entrar no clima em casa, no churrasco ou com a galera.</p>
+                <a class="btn" href="https://lista.mercadolivre.com.br/camiseta-brasil-copa" target="_blank" rel="noopener">Ver ofertas</a>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="media"><i class="fa-solid fa-futbol" aria-hidden="true"></i></div>
+            <div class="card-content">
+                <h2>Bolas e itens de futebol</h2>
+                <p>Produtos para brincar, treinar e completar a decoracao do jogo.</p>
+                <a class="btn" href="https://lista.mercadolivre.com.br/bola-copa-do-mundo" target="_blank" rel="noopener">Ver ofertas</a>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="media"><i class="fa-solid fa-flag" aria-hidden="true"></i></div>
+            <div class="card-content">
+                <h2>Bandeiras e decoracao</h2>
+                <p>Itens para deixar sala, varanda ou area gourmet pronta para a torcida.</p>
+                <a class="btn" href="https://lista.mercadolivre.com.br/decoracao-copa-do-mundo" target="_blank" rel="noopener">Ver ofertas</a>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="media"><i class="fa-solid fa-tv" aria-hidden="true"></i></div>
+            <div class="card-content">
+                <h2>Eletronicos para assistir</h2>
+                <p>TVs, caixas de som e acessorios para melhorar a experiencia dos jogos.</p>
+                <a class="btn" href="https://lista.mercadolivre.com.br/tv-caixa-som-copa" target="_blank" rel="noopener">Ver ofertas</a>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="media"><i class="fa-solid fa-mug-saucer" aria-hidden="true"></i></div>
+            <div class="card-content">
+                <h2>Copos, petiscos e cozinha</h2>
+                <p>Achadinhos para montar mesa, lancheira e cantinho do jogo.</p>
+                <a class="btn" href="https://lista.mercadolivre.com.br/copos-petiscos-copa" target="_blank" rel="noopener">Ver ofertas</a>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="media"><i class="fa-solid fa-star" aria-hidden="true"></i></div>
+            <div class="card-content">
+                <h2>Todos os produtos da Copa</h2>
+                <p>Busca geral com varias ideias para comprar antes dos jogos.</p>
+                <a class="btn" href="https://lista.mercadolivre.com.br/copa-do-mundo" target="_blank" rel="noopener">Ver tudo</a>
+            </div>
+        </article>
+    </section>
+</main>
+</body>
+</html>
