@@ -1,5 +1,27 @@
-export async function onRequestPost(context) {
-    const { request, env } = context;
+export default {
+    async fetch(request, env) {
+        const url = new URL(request.url);
+
+        if (url.pathname === "/telegram-click") {
+            return handleTelegramClick(request, env);
+        }
+
+        return env.ASSETS.fetch(request);
+    }
+};
+
+async function handleTelegramClick(request, env) {
+    if (request.method === "OPTIONS") {
+        return new Response(null, {
+            status: 204,
+            headers: corsHeaders()
+        });
+    }
+
+    if (request.method !== "POST") {
+        return jsonResponse({ ok: false, error: "Method not allowed." }, 405);
+    }
+
     const botToken = env.TELEGRAM_BOT_TOKEN;
     const chatId = env.TELEGRAM_CHAT_ID;
 
@@ -41,17 +63,6 @@ export async function onRequestPost(context) {
     }
 
     return jsonResponse({ ok: true });
-}
-
-export function onRequest(context) {
-    if (context.request.method === "OPTIONS") {
-        return new Response(null, {
-            status: 204,
-            headers: corsHeaders()
-        });
-    }
-
-    return jsonResponse({ ok: false, error: "Method not allowed." }, 405);
 }
 
 function cleanText(value, maxLength) {
