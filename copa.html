@@ -140,7 +140,11 @@ h1 {
 }
 
 .card {
+    position: relative;
+    display: flex;
     min-width: 0;
+    height: 100%;
+    flex-direction: column;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 18px;
@@ -150,18 +154,36 @@ h1 {
     transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.32), transparent 34%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease;
+}
+
 .card:hover {
     transform: translateY(-3px);
     box-shadow: 0 22px 52px rgba(0, 168, 89, 0.20), 0 18px 42px rgba(0, 0, 0, 0.26);
 }
 
+.card:hover::after {
+    opacity: 1;
+}
+
 .media {
     display: grid;
     place-items: center;
-    min-height: 132px;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    min-height: 0;
     background:
         radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.92) 0 32%, transparent 33%),
         linear-gradient(135deg, #fff16b, #e9fff2 48%, #dbeafe);
+    border-bottom: 1px solid rgba(231, 233, 240, 0.9);
 }
 
 .media i {
@@ -172,24 +194,44 @@ h1 {
 
 .card-content {
     display: flex;
-    min-height: 142px;
+    flex: 1;
     flex-direction: column;
-    padding: 14px;
+    padding: 12px;
+    background: #fff;
 }
 
-.card h2 {
-    margin: 0 0 8px;
+.card-title {
+    display: block;
+    min-height: 38px;
+    margin: 0 0 10px;
+    color: #171923;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.price {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    margin: 0 0 11px;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: #fff5d6;
+    color: #9b6500;
     font-size: 15px;
     font-weight: 800;
-    line-height: 1.3;
 }
 
-.card p {
-    margin: 0 0 14px;
-    color: #5f6676;
-    font-size: 12.5px;
-    font-weight: 600;
-    line-height: 1.45;
+.price::before {
+    content: "Oferta";
+    margin-right: 6px;
+    padding-right: 6px;
+    border-right: 1px solid rgba(155, 101, 0, 0.22);
+    color: #c27b00;
+    font-size: 10px;
+    text-transform: uppercase;
 }
 
 .btn {
@@ -198,13 +240,26 @@ h1 {
     justify-content: center;
     min-height: 40px;
     margin-top: auto;
+    padding: 10px 11px;
     border-radius: 12px;
     background: linear-gradient(135deg, #fff16b 0%, #00a859 54%, #1d4ed8 100%);
     color: var(--dark);
     font-size: 12px;
     font-weight: 800;
     text-align: center;
+    text-decoration: none;
     text-transform: uppercase;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn::after {
+    content: ">";
+    margin-left: 7px;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(0, 168, 89, 0.24);
 }
 
 @media (min-width: 720px) {
@@ -232,128 +287,158 @@ h1 {
         <a class="back-link" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar para o inicio</a>
     </header>
 
-    <div id="productSections"></div>
-</main>
-<script>
-const categories = [
-    {
-        title: "Camisetas e looks para torcer",
-        icon: "fa-shirt",
-        note: "9 opcoes",
-        description: "Look para entrar no clima da Copa em casa, no churrasco ou com a galera.",
-        items: [
-            ["Camisa Brasil torcedor", "https://lista.mercadolivre.com.br/camisa-brasil-torcedor"],
-            ["Camiseta amarela Brasil", "https://lista.mercadolivre.com.br/camiseta-amarela-brasil-copa"],
-            ["Camisa verde Brasil", "https://lista.mercadolivre.com.br/camisa-verde-brasil-copa"],
-            ["Kit camiseta casal Brasil", "https://lista.mercadolivre.com.br/kit-camiseta-casal-brasil"],
-            ["Camiseta infantil Brasil", "https://lista.mercadolivre.com.br/camiseta-infantil-brasil-copa"],
-            ["Bone Brasil torcida", "https://lista.mercadolivre.com.br/bone-brasil-torcida"],
-            ["Shorts Brasil torcida", "https://lista.mercadolivre.com.br/shorts-brasil-torcida"],
-            ["Moletom Brasil Copa", "https://lista.mercadolivre.com.br/moletom-brasil-copa"],
-            ["Look completo torcida Brasil", "https://lista.mercadolivre.com.br/look-torcida-brasil-copa"]
-        ]
-    },
-    {
-        title: "Bolas e itens de futebol",
-        icon: "fa-futbol",
-        note: "9 opcoes",
-        description: "Produtos para brincar, treinar e completar o clima de futebol.",
-        items: [
-            ["Bola Copa do Mundo", "https://lista.mercadolivre.com.br/bola-copa-do-mundo"],
-            ["Bola de futebol campo", "https://lista.mercadolivre.com.br/bola-futebol-campo"],
-            ["Bola society", "https://lista.mercadolivre.com.br/bola-futebol-society"],
-            ["Bola futsal", "https://lista.mercadolivre.com.br/bola-futsal"],
-            ["Mini bola decorativa", "https://lista.mercadolivre.com.br/mini-bola-futebol-decorativa"],
-            ["Chuteira campo", "https://lista.mercadolivre.com.br/chuteira-campo"],
-            ["Chuteira society", "https://lista.mercadolivre.com.br/chuteira-society"],
-            ["Luva de goleiro", "https://lista.mercadolivre.com.br/luva-goleiro"],
-            ["Kit treino futebol", "https://lista.mercadolivre.com.br/kit-treino-futebol"]
-        ]
-    },
-    {
-        title: "Bandeiras e decoracao",
-        icon: "fa-flag",
-        note: "9 opcoes",
-        description: "Itens para deixar sala, varanda ou area gourmet pronta para a torcida.",
-        items: [
-            ["Bandeira do Brasil", "https://lista.mercadolivre.com.br/bandeira-brasil"],
-            ["Bandeirinhas Brasil", "https://lista.mercadolivre.com.br/bandeirinhas-brasil-copa"],
-            ["Painel decorativo Copa", "https://lista.mercadolivre.com.br/painel-decorativo-copa"],
-            ["Baloes verde amarelo", "https://lista.mercadolivre.com.br/baloes-verde-amarelo"],
-            ["Toalha de mesa Brasil", "https://lista.mercadolivre.com.br/toalha-mesa-brasil-copa"],
-            ["Adesivos Copa do Mundo", "https://lista.mercadolivre.com.br/adesivos-copa-do-mundo"],
-            ["Faixa torcida Brasil", "https://lista.mercadolivre.com.br/faixa-torcida-brasil"],
-            ["Enfeites Copa do Mundo", "https://lista.mercadolivre.com.br/enfeites-copa-do-mundo"],
-            ["Kit festa Brasil", "https://lista.mercadolivre.com.br/kit-festa-brasil-copa"]
-        ]
-    },
-    {
-        title: "Eletronicos para assistir",
-        icon: "fa-tv",
-        note: "9 opcoes",
-        description: "Achadinhos para melhorar imagem, som e conforto na hora dos jogos.",
-        items: [
-            ["Smart TV", "https://lista.mercadolivre.com.br/smart-tv"],
-            ["TV 4K", "https://lista.mercadolivre.com.br/tv-4k"],
-            ["Projetor portatil", "https://lista.mercadolivre.com.br/projetor-portatil"],
-            ["Caixa de som Bluetooth", "https://lista.mercadolivre.com.br/caixa-som-bluetooth"],
-            ["Soundbar", "https://lista.mercadolivre.com.br/soundbar"],
-            ["Suporte para TV", "https://lista.mercadolivre.com.br/suporte-tv"],
-            ["Antena digital", "https://lista.mercadolivre.com.br/antena-digital"],
-            ["Controle universal", "https://lista.mercadolivre.com.br/controle-universal-tv"],
-            ["Cabo HDMI", "https://lista.mercadolivre.com.br/cabo-hdmi"]
-        ]
-    },
-    {
-        title: "Copos, petiscos e cozinha",
-        icon: "fa-mug-saucer",
-        note: "9 opcoes",
-        description: "Tudo para montar mesa, lanche e cantinho do jogo com praticidade.",
-        items: [
-            ["Copo Brasil", "https://lista.mercadolivre.com.br/copo-brasil"],
-            ["Copo termico Brasil", "https://lista.mercadolivre.com.br/copo-termico-brasil"],
-            ["Caneca Brasil", "https://lista.mercadolivre.com.br/caneca-brasil"],
-            ["Kit churrasco", "https://lista.mercadolivre.com.br/kit-churrasco"],
-            ["Petisqueira", "https://lista.mercadolivre.com.br/petisqueira"],
-            ["Tabua de frios", "https://lista.mercadolivre.com.br/tabua-de-frios"],
-            ["Pipoqueira", "https://lista.mercadolivre.com.br/pipoqueira"],
-            ["Fritadeira eletrica", "https://lista.mercadolivre.com.br/air-fryer"],
-            ["Balde de gelo", "https://lista.mercadolivre.com.br/balde-de-gelo"]
-        ]
-    }
-];
-
-const productSections = document.getElementById("productSections");
-
-categories.forEach((category) => {
-    const section = document.createElement("section");
-    section.className = "category";
-    section.innerHTML = `
+    <section class="category">
         <div class="section-header">
-            <h2>${category.title}</h2>
-            <span class="section-note">${category.note}</span>
+            <h2>Camisetas e looks para torcer</h2>
+            <span class="section-note">9 opcoes</span>
         </div>
-        <div class="products" aria-label="${category.title}"></div>
-    `;
+        <div class="products">
+            <article class="card">
+                <div class="media"><i class="fa-solid fa-shirt" aria-hidden="true"></i></div>
+                <div class="card-content">
+                    <h3 class="card-title">Blusa Tricot Feminina Moda Copa 2026</h3>
+                    <p class="price">Ver preco</p>
+                    <a href="https://meli.la/1mkT9nB" class="btn" target="_blank" rel="noopener">Ver ofertas</a>
+                </div>
+            </article>
+            <article class="card">
+                <div class="media"><i class="fa-solid fa-shirt" aria-hidden="true"></i></div>
+                <div class="card-content">
+                    <h3 class="card-title">Camiseta amarela Brasil</h3>
+                    <p class="price">Ver preco</p>
+                    <a href="https://lista.mercadolivre.com.br/camiseta-amarela-brasil-copa" class="btn" target="_blank" rel="noopener">Ver ofertas</a>
+                </div>
+            </article>
+            <article class="card">
+                <div class="media"><i class="fa-solid fa-shirt" aria-hidden="true"></i></div>
+                <div class="card-content">
+                    <h3 class="card-title">Camisa verde Brasil</h3>
+                    <p class="price">Ver preco</p>
+                    <a href="https://lista.mercadolivre.com.br/camisa-verde-brasil-copa" class="btn" target="_blank" rel="noopener">Ver ofertas</a>
+                </div>
+            </article>
+            <article class="card">
+                <div class="media"><i class="fa-solid fa-shirt" aria-hidden="true"></i></div>
+                <div class="card-content">
+                    <h3 class="card-title">Kit camiseta casal Brasil</h3>
+                    <p class="price">Ver preco</p>
+                    <a href="https://lista.mercadolivre.com.br/kit-camiseta-casal-brasil" class="btn" target="_blank" rel="noopener">Ver ofertas</a>
+                </div>
+            </article>
+            <article class="card">
+                <div class="media"><i class="fa-solid fa-shirt" aria-hidden="true"></i></div>
+                <div class="card-content">
+                    <h3 class="card-title">Camiseta infantil Brasil</h3>
+                    <p class="price">Ver preco</p>
+                    <a href="https://lista.mercadolivre.com.br/camiseta-infantil-brasil-copa" class="btn" target="_blank" rel="noopener">Ver ofertas</a>
+                </div>
+            </article>
+            <article class="card">
+                <div class="media"><i class="fa-solid fa-shirt" aria-hidden="true"></i></div>
+                <div class="card-content">
+                    <h3 class="card-title">Bone Brasil torcida</h3>
+                    <p class="price">Ver preco</p>
+                    <a href="https://lista.mercadolivre.com.br/bone-brasil-torcida" class="btn" target="_blank" rel="noopener">Ver ofertas</a>
+                </div>
+            </article>
+            <article class="card">
+                <div class="media"><i class="fa-solid fa-shirt" aria-hidden="true"></i></div>
+                <div class="card-content">
+                    <h3 class="card-title">Shorts Brasil torcida</h3>
+                    <p class="price">Ver preco</p>
+                    <a href="https://lista.mercadolivre.com.br/shorts-brasil-torcida" class="btn" target="_blank" rel="noopener">Ver ofertas</a>
+                </div>
+            </article>
+            <article class="card">
+                <div class="media"><i class="fa-solid fa-shirt" aria-hidden="true"></i></div>
+                <div class="card-content">
+                    <h3 class="card-title">Moletom Brasil Copa</h3>
+                    <p class="price">Ver preco</p>
+                    <a href="https://lista.mercadolivre.com.br/moletom-brasil-copa" class="btn" target="_blank" rel="noopener">Ver ofertas</a>
+                </div>
+            </article>
+            <article class="card">
+                <div class="media"><i class="fa-solid fa-shirt" aria-hidden="true"></i></div>
+                <div class="card-content">
+                    <h3 class="card-title">Look completo torcida Brasil</h3>
+                    <p class="price">Ver preco</p>
+                    <a href="https://lista.mercadolivre.com.br/look-torcida-brasil-copa" class="btn" target="_blank" rel="noopener">Ver ofertas</a>
+                </div>
+            </article>
+        </div>
+    </section>
 
-    const products = section.querySelector(".products");
+    <section class="category">
+        <div class="section-header">
+            <h2>Bolas e itens de futebol</h2>
+            <span class="section-note">9 opcoes</span>
+        </div>
+        <div class="products">
+            <article class="card"><div class="media"><i class="fa-solid fa-futbol" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Bola Copa do Mundo</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/bola-copa-do-mundo" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-futbol" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Bola de futebol campo</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/bola-futebol-campo" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-futbol" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Bola society</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/bola-futebol-society" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-futbol" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Bola futsal</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/bola-futsal" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-futbol" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Mini bola decorativa</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/mini-bola-futebol-decorativa" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-futbol" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Chuteira campo</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/chuteira-campo" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-futbol" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Chuteira society</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/chuteira-society" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-futbol" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Luva de goleiro</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/luva-goleiro" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-futbol" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Kit treino futebol</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/kit-treino-futebol" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+        </div>
+    </section>
 
-    category.items.forEach(([title, url]) => {
-        const card = document.createElement("article");
-        card.className = "card";
-        card.innerHTML = `
-            <div class="media"><i class="fa-solid ${category.icon}" aria-hidden="true"></i></div>
-            <div class="card-content">
-                <h2>${title}</h2>
-                <p>${category.description}</p>
-                <a class="btn" href="${url}" target="_blank" rel="noopener">Ver ofertas</a>
-            </div>
-        `;
-        products.appendChild(card);
-    });
+    <section class="category">
+        <div class="section-header">
+            <h2>Bandeiras e decoracao</h2>
+            <span class="section-note">9 opcoes</span>
+        </div>
+        <div class="products">
+            <article class="card"><div class="media"><i class="fa-solid fa-flag" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Bandeira do Brasil</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/bandeira-brasil" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-flag" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Bandeirinhas Brasil</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/bandeirinhas-brasil-copa" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-flag" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Painel decorativo Copa</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/painel-decorativo-copa" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-flag" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Baloes verde amarelo</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/baloes-verde-amarelo" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-flag" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Toalha de mesa Brasil</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/toalha-mesa-brasil-copa" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-flag" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Adesivos Copa do Mundo</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/adesivos-copa-do-mundo" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-flag" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Faixa torcida Brasil</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/faixa-torcida-brasil" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-flag" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Enfeites Copa do Mundo</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/enfeites-copa-do-mundo" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-flag" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Kit festa Brasil</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/kit-festa-brasil-copa" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+        </div>
+    </section>
 
-    productSections.appendChild(section);
-});
-</script>
+    <section class="category">
+        <div class="section-header">
+            <h2>Eletronicos para assistir</h2>
+            <span class="section-note">9 opcoes</span>
+        </div>
+        <div class="products">
+            <article class="card"><div class="media"><i class="fa-solid fa-tv" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Smart TV</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/smart-tv" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-tv" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">TV 4K</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/tv-4k" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-tv" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Projetor portatil</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/projetor-portatil" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-tv" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Caixa de som Bluetooth</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/caixa-som-bluetooth" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-tv" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Soundbar</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/soundbar" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-tv" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Suporte para TV</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/suporte-tv" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-tv" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Antena digital</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/antena-digital" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-tv" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Controle universal</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/controle-universal-tv" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-tv" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Cabo HDMI</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/cabo-hdmi" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+        </div>
+    </section>
+
+    <section class="category">
+        <div class="section-header">
+            <h2>Copos, petiscos e cozinha</h2>
+            <span class="section-note">9 opcoes</span>
+        </div>
+        <div class="products">
+            <article class="card"><div class="media"><i class="fa-solid fa-mug-saucer" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Copo Brasil</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/copo-brasil" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-mug-saucer" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Copo termico Brasil</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/copo-termico-brasil" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-mug-saucer" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Caneca Brasil</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/caneca-brasil" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-mug-saucer" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Kit churrasco</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/kit-churrasco" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-mug-saucer" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Petisqueira</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/petisqueira" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-mug-saucer" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Tabua de frios</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/tabua-de-frios" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-mug-saucer" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Pipoqueira</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/pipoqueira" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-mug-saucer" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Fritadeira eletrica</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/air-fryer" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+            <article class="card"><div class="media"><i class="fa-solid fa-mug-saucer" aria-hidden="true"></i></div><div class="card-content"><h3 class="card-title">Balde de gelo</h3><p class="price">Ver preco</p><a href="https://lista.mercadolivre.com.br/balde-de-gelo" class="btn" target="_blank" rel="noopener">Ver ofertas</a></div></article>
+        </div>
+    </section>
+</main>
 </body>
 </html>
