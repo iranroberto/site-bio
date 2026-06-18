@@ -3,7 +3,7 @@ const path = require("path");
 
 const rootDir = path.resolve(__dirname, "..");
 const distDir = path.join(rootDir, "dist");
-const htmlFiles = ["index.html", "copa.html", "namorados.html"];
+const htmlFiles = ["index.html", "copa.html", "namorados.html", "ofertas-selecionadas.html"];
 const staticFiles = ["perfil.png"];
 
 fs.rmSync(distDir, { recursive: true, force: true });
