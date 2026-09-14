@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "sitebio",
+  "name": "site-bio",
+  "account_id": "221749bd3b8e97352af023b236edd110",
   "main": "src/index.js",
   "compatibility_date": "2026-05-13",
   "observability": {
